@@ -6,4 +6,4 @@ This code is based on [Robo Cup Junior 2014 entry](https://github.com/abaeyens/i
  * [picamera](https://picamera.readthedocs.io/en/release-1.13/)
  * [openCV](https://opencv-python-tutroals.readthedocs.io/en/latest)
 
-![screenshot][screenshot.png]
+![screenshot](screenshot.png)
