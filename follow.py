@@ -42,9 +42,6 @@ SCAN_RADIUS_REG = 25
 # to make better choices
 NUMBER_OF_CIRCLES = 3
 
-SERIAL_PORT = "/dev/ttyAMA0"
-SERIAL_BAUD = 115000
-
 def scanLine(image, display_image, point, radius):
         x = point[0];
         y = point[1];
@@ -231,20 +228,15 @@ def main():
 
         cv2.createTrackbar(CONTROL_LINE_WIDTH, WINDOW_DISPLAY_IMAGE, 0, RESOLUTION_X, onLineWidthChange)
         cv2.setTrackbarPos(CONTROL_LINE_WIDTH, WINDOW_DISPLAY_IMAGE, SCAN_RADIUS *2)
-        
-
-        com = serial.Serial(SERIAL_PORT)
-        com.baudrate = SERIAL_BAUD
 
         returnString = """
 Press Esc to end the program
-Currently using serial port '{}' at {} baud.
 Using camera resolution: {}x{}
 Centre point: {}:{}
 Scan radius: {}
 Number of search itterations: {}
 Baseline Width: {}
-""".format(SERIAL_PORT, SERIAL_BAUD, RESOLUTION_X, RESOLUTION_Y, SCAN_POS_X, SCAN_HEIGHT, SCAN_RADIUS_REG, NUMBER_OF_CIRCLES, SCAN_RADIUS *2)
+""".format(RESOLUTION_X, RESOLUTION_Y, SCAN_POS_X, SCAN_HEIGHT, SCAN_RADIUS_REG, NUMBER_OF_CIRCLES, SCAN_RADIUS *2)
 
         print(returnString)
                         
@@ -338,16 +330,13 @@ Baseline Width: {}
                                       line_scan_length,
                                       line_length_from_center)
                         print(returnString)
-                        
-                        com.write(returnString)
-                                                   
+                                                                           
                         # Wait for ESC to end program
                         c = cv2.waitKey(7) % 0x100
                         if c == 27:
                                 break
         print "Closing program"
         cv2.destroyAllWindows()
-        com.close()
         print "All windows should be closed"
         return;
 
